@@ -1,6 +1,8 @@
 package com.example.kotlin01
 
 import sun.security.krb5.internal.KDCOptions.with
+import java.io.BufferedReader
+import java.io.FileReader
 
 /**
  * Created by simple_soul on 2017/6/26.
@@ -43,32 +45,44 @@ fun main(args: Array<String>)
 //    println(list2.takeWhile { it%2==0 })
 
     //let(默认当前对象为it，返回值为最后一行)
-    println(list2.let {
-        it.toString()
-        it[1]
-    })
+//    println(list2.let {
+//        it.toString()
+//        it[1]
+//    })
 
     //apply(在函数内可以直接调用该对象的方法，返回该对象)
-    println(list2.apply{
-        toString()
-        get(1)
-    })
+//    println(list2.apply{
+//        toString()
+//        get(1)
+//    })
 
     //run(在函数内可以直接调用该对象的方法，返回最后一行)
-    println(list2.run {
-        toString()
-        get(1)
-    })
+//    println(list2.run {
+//        toString()
+//        get(1)
+//    })
 
     //以上三个方法可以简化非空判断(不为空就执行)
-    list2?.apply { get(1) }
+//    list2?.apply { get(1) }
 
     //with(在函数内可以直接调用该对象的方法，返回最后一行。此函数为单独函数，需要传值)
-    println(with(list2)
-            {
-                toString()
-                get(1)
-            })
+//    println(with(list2)
+//            {
+//                toString()
+//                get(1)
+//            })
+
+    //user(将自动把对象进行close，try，catch等操作)
+    BufferedReader(FileReader("hello.txt")).use {
+        var line : String?
+        while(true)
+        {
+            line = it.readLine() ?: break
+            println(line)
+        }
+    }
+    //简化
+    println(BufferedReader(FileReader("hello.txt")).readText())
 
 }
 
